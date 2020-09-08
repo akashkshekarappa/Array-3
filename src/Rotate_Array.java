@@ -46,7 +46,25 @@ class Rotate_Array_Brute_Force {
 	}
 }
 
+/********************************************Using Extra Space*************************************/
+//Time Complexity :O(n), n is length of array
+//Space Complexity :O(n), size of new array
+//Did this code successfully run on Leetcode : Yes
+//Any problem you faced while coding this : No
 
+class Solution {
+	public void rotate(int[] nums, int k) {
+		int[] arr = new int[nums.length];
+		//rotating array 
+		for(int i=0; i<nums.length; i++){
+			arr[(i+k) % nums.length] = nums[i];
+		}
+		//Assigning rotated array to original array  
+		for(int i=0; i<nums.length; i++){
+			nums[i] = arr[i];
+		}
+	}
+}
 /********************************************Using Reverse*************************************/
 //Time Complexity :O(n), number of elements reversed
 //Space Complexity :O(1)
@@ -63,10 +81,10 @@ class Rotate_Array_Reverse {
 		if(nums == null || nums.length < 2) // there should be atleast 2 numbers to rotate the array
 			return;
 		if(k > nums.length)
-			k = k % nums.length;    //if k is greater than array length, then reset k accroding to mod value taken
+			k = k % nums.length;    //if k is greater than array length, then reset k according to mod value taken
 		reverse(nums, 0, nums.length-1);    //reverse all elements
-		reverse(nums, 0 , k -1);  //reversing first k elements
-		reverse(nums, k, nums.length-1);    //reverse last nums.length-k elements
+		reverse(nums, 0 , k -1);  //reversing first k elements		//for left rotate, reverse(nums, 0, nums.length-k-1)
+		reverse(nums, k, nums.length-1);    //reverse last nums.length-k elements		//for left rotate, reverse(nums, nums.length-k, nums.length-1)
 	}
 	private void reverse(int[] nums, int start, int end){
 		while(start< end){
